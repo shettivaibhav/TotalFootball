@@ -2,12 +2,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Signup from './components/auth/Signup.jsx'
 import Login from './components/auth/Login.jsx'
-import Homepage from './homepage/Homepage'
-import Player_details from './details/Player_details'
-import Main from './main/Main.jsx'
-import Standings from './pages/Standings';
-import Resume from './pages/Resume';
-//import SearchPlayers from "./SearchPlayers";
+import Homepage from './components/homepage/Homepage.jsx'
+import Player_details from './components/details/Player_details.jsx'
+import Main from './components/main/Main.jsx'
+import Standings from './components/pages/Standings.jsx';
+import Resume from './components/pages/Resume.jsx';
+import SearchPlayers from "./components/pages/SearchPlayers";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
@@ -23,7 +23,7 @@ function App() {
         <Route path='/main' element={<Main/>} ></Route>
         <Route path='/live-match' element={<Standings />} />
         <Route path='/resume' element={<Resume/>} ></Route> 
-        {/* <Route path="/searchplayers" element={<SearchPlayers/>} </Route> */}
+        <Route path="/searchplayers" element={<SearchPlayers/>} ></Route>
       </Routes>
     </BrowserRouter>
   )

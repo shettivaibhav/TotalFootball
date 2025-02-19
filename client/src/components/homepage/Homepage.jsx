@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../images/logo.jpg';
+import logo from '@/images/logo.jpg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import featureIcon1 from '../images/feature1.png';
-import featureIcon2 from '../images/feature2.png';
-import featureIcon3 from '../images/feature3.png';
-import facebookIcon from '../images/facebook.png';
-import twitterIcon from '../images/twitter.png';
-import instagramIcon from '../images/instagram.png';
-import linkedinIcon from '../images/linkedin.png';
-import goal from '../images/goal.png';
+import featureIcon1 from '@/images/feature1.png';
+import featureIcon2 from '@/images/feature2.png';
+import featureIcon3 from '@/images/feature3.png';
+import facebookIcon from '@/images/facebook.png';
+import twitterIcon from '@/images/twitter.png';
+import instagramIcon from '@/images/instagram.png';
+import linkedinIcon from '@/images/linkedin.png';
+import goal from '@/images/goal.png';
 import Carousel from 'react-bootstrap/Carousel';
+import { Button } from "@/components/ui/button"
+
 
 const Homepage = () => {
   const location = useLocation();
@@ -55,7 +57,7 @@ const Homepage = () => {
             </ul>
           </nav>
           <div className="space-x-4">
-            <button onClick={() => navigate('/login')} className="px-4 py-2 border border-blue-500 text-white rounded-lg">Login</button>
+            <Button variant="default" onClick={() => navigate('/login')} >Login</Button>
             <button onClick={() => navigate('/register')} className="px-5 py-3 bg-blue-900 text-white text-lg rounded-full transition-transform transform hover:scale-105">Join now</button>
           </div>
         </div>

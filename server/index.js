@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const PlayersModel = require("./models/players"); // Signup model
-// const playersRoutes = require("./routes/playersRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 
 const app = express();
 app.use(express.json());
@@ -96,6 +96,26 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.get('/playerdetails', authenticate, async (req, res) => {
+  try {
+    // Fetch player details using the authenticated user's ID
+    const playerDetails = await Players.findById(req.user.id);
+
+    // If player not found, return 404 error
+    if (!playerDetails) {
+      return res.status(404).json({ message: 'Player details not found' });
+    }
+
+    // Return the player details
+    res.json(playerDetails);
+  } catch (error) {
+    console.error('Error fetching player details:', error);
+    res.status(500).json({ message: 'Error fetching player details', error: error.message });
+  }
+});
+
+
+
 // Route for updating detailed player information
 app.post("/playerdetails", authenticate, (req, res) => {
   const playerId = req.user.id; // Extract player ID from the decoded token
@@ -130,8 +150,7 @@ app.get("/resume", authenticate, async (req, res) => {
 });
 
 //search players
-/*const playersRoutes = require("./routes/playersRoutes");
-app.use("/playersRoutes", playersRoutes); // <-- This defines the path*/
+app.use("/", searchRoutes);
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001");

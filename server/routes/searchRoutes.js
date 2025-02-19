@@ -1,16 +1,18 @@
 const express = require("express");
-const router = express.Router();
 const PlayersModel = require("../models/players");
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 // GET players with search, filter, and sort
-router.get("/", async (req, res) => {
+app.get("/search", async (req, res) => {
     try {
         let query = {}; // Dynamic search query
         let { search, role, age, position, club, sortBy } = req.query;
 
-        // 🔍 Search by Name
+        // 🔍 Search by Name (Case-Insensitive)
         if (search) {
-            query.name = { $regex: search, $options: "i" }; // Case-insensitive search
+            query.name = { $regex: search, $options: "i" };
         }
 
         // 🎭 Filter by Role (Player or Coach)
@@ -18,22 +20,24 @@ router.get("/", async (req, res) => {
             query.userType = role;
         }
 
-        // 📅 Filter by Age Range
+        // 📅 Corrected Age Range Filtering using DOB
         if (age) {
             const [minAge, maxAge] = age.split("-").map(Number);
-            const currentYear = new Date().getFullYear();
-            query.dateOfBirth = { 
-                $gte: new Date(`${currentYear - maxAge}-01-01`), 
-                $lte: new Date(`${currentYear - minAge}-12-31`)
-            };
+            if (minAge && maxAge) {
+                const currentDate = new Date();
+                const minDOB = new Date(currentDate.setFullYear(currentDate.getFullYear() - maxAge));
+                const maxDOB = new Date(currentDate.setFullYear(currentDate.getFullYear() - minAge));
+
+                query.dateOfBirth = { $gte: minDOB, $lte: maxDOB };
+            }
         }
 
         // ⚽ Filter by Position (Only for Players)
         if (position) {
-            query.position = position;
+            query.position = { $regex: position, $options: "i" };
         }
 
-        // 🏟️ Filter by Club
+        // 🏟️ Filter by Club (Case-Insensitive)
         if (club) {
             query.currentClub = { $regex: club, $options: "i" };
         }
@@ -41,8 +45,8 @@ router.get("/", async (req, res) => {
         // 🔀 Sorting Logic
         let sortQuery = {};
         if (sortBy) {
-            if (sortBy === "age") sortQuery.dateOfBirth = 1; // Oldest to Youngest
-            if (sortBy === "-age") sortQuery.dateOfBirth = -1; // Youngest to Oldest
+            if (sortBy === "age") sortQuery.dateOfBirth = 1; // Oldest to youngest
+            if (sortBy === "-age") sortQuery.dateOfBirth = -1; // Youngest to oldest
             if (sortBy === "name") sortQuery.name = 1; // A-Z
             if (sortBy === "-name") sortQuery.name = -1; // Z-A
         }
