@@ -48,7 +48,6 @@ const CardResume = () => {
         <h3 className="text-xl font-semibold text-gray-700 border-b pb-2">Career Details</h3>
         <ul className="text-gray-600 mt-2">
           {player.position && <li><strong>Position:</strong> {player.position}</li>}
-          {player.currentClub && <li><strong>Current Club:</strong> {player.currentClub}</li>}
           {player.teamName && <li><strong>Team Name:</strong> {player.teamName}</li>}
           {player.yearsExperience && <li><strong>Years of Experience:</strong> {player.yearsExperience}</li>}
           {player.tacticalFlexibility && <li><strong>Tactical Flexibility:</strong> {player.tacticalFlexibility}</li>}
@@ -110,6 +109,18 @@ const CardResume = () => {
           </a>
         </div>
       )}
+      
+        {/* Player Contact and Email */}
+        <div className="player-contact">
+        <a 
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${player.email}&su=Interested%20in%20Your%20Profile&body=Hello%20${player.name},%0A%0AI%20came%20across%20your%20profile...`}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <button>Contact Player</button>
+        </a>
+        </div>
+
     </div>
   );
 };

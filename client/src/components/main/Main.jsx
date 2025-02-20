@@ -40,7 +40,7 @@ const navItems = [
 ]
 
 const ads = [
-  { id: 1, image: adv1, alt: 'adv 1' , link: 'https://www.easports.com'},
+  { id: 1, image: adv1, alt: 'adv 1' , link: 'https://mail.google.com/'},
   { id: 2, image: adv2, alt: 'adv 2' , link: 'https://www.espn.com'},
   { id: 3, image: adv3, alt: 'adv 3' , link: 'https://www.easports.com'},
 ]

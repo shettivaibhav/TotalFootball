@@ -63,7 +63,6 @@ const Resume = () => {
           <p><strong>Date of Birth:</strong> {new Date(player.dateOfBirth).toLocaleDateString()}</p>
           <p><strong>Years of Experience:</strong> {player.yearsExperience}</p>
           <p><strong>Team Name:</strong> {player.teamName}</p>
-          <p><strong>Current Club:</strong> {player.currentClub}</p>
           <p><strong>Contract End Date:</strong> {new Date(player.contractEndDate).toLocaleDateString()}</p>
           <p><strong>Tactical Flexibility:</strong> {player.tacticalFlexibility}</p>
         </div>

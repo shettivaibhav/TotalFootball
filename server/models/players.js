@@ -22,7 +22,6 @@ const PlayersSchema = new mongoose.Schema({
     teamName: String,
     tacticalFlexibility: String,
     notableAchievements: String,
-    currentClub: { type: String, index: true }, // ✅ Index added for club filtering
     contractEndDate: Date,
     appearances: Number,
     goalsScored: Number,

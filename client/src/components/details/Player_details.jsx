@@ -18,7 +18,6 @@ const Player_details = () => {
     teamName: '',
     tacticalFlexibility: '',
     notableAchievements: '',
-    currentClub: '',
     contractEndDate: '',
     appearances: '',
     goalsScored: '',
@@ -65,7 +64,6 @@ const Player_details = () => {
           teamName: playerDetails.teamName || '',
           tacticalFlexibility: playerDetails.tacticalFlexibility || '',
           notableAchievements: playerDetails.notableAchievements || '',
-          currentClub: playerDetails.currentClub || '',
           contractEndDate: playerDetails.contractEndDate || '',
           appearances: playerDetails.appearances || '',
           goalsScored: playerDetails.goalsScored || '',
@@ -206,11 +204,6 @@ const Player_details = () => {
     <div>
       <label htmlFor="notableAchievements" className="block text-sm font-semibold text-gray-700">Notable Achievements</label>
       <textarea id="notableAchievements" name="notableAchievements" value={formData.notableAchievements} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
-    </div>
-
-    <div>
-      <label htmlFor="currentClub" className="block text-sm font-semibold text-gray-700">Current Club</label>
-      <input type="text" id="currentClub" name="currentClub" value={formData.currentClub} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
     </div>
 
     <div>
