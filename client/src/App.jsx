@@ -7,7 +7,7 @@ import Player_details from './components/details/Player_details.jsx'
 import Main from './components/main/Main.jsx'
 import Standings from './components/pages/Standings.jsx';
 import Resume from './components/pages/Resume.jsx';
-import SearchPlayers from "./components/pages/SearchPlayers";
+import CardResume from "./components/pages/CardResume.jsx";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
@@ -23,7 +23,7 @@ function App() {
         <Route path='/main' element={<Main/>} ></Route>
         <Route path='/live-match' element={<Standings />} />
         <Route path='/resume' element={<Resume/>} ></Route> 
-        <Route path="/searchplayers" element={<SearchPlayers/>} ></Route>
+        <Route path="/cardresume/:id" element={<CardResume/>} ></Route>
       </Routes>
     </BrowserRouter>
   )

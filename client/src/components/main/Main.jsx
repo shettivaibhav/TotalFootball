@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, LogOut, ChevronDown, ChevronLeft, ChevronRight, Menu } from 'lucide-react'
-
+import SearchPlayers from "../pages/SearchPlayers";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -159,6 +159,7 @@ export default function Main() {
                   </Button>
                 </div>
               </div>
+              <SearchPlayers/>
               {/* Add more dashboard content here */}
             </div>
           </main>

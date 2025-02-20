@@ -231,6 +231,51 @@ const Player_details = () => {
     </div>
   </div>
 
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="assists" className="block text-sm font-semibold text-gray-700">Assists</label>
+            <input type="number" id="assists" name="assists" value={formData.assists} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label htmlFor="cleanSheets" className="block text-sm font-semibold text-gray-700">Clean Sheets</label>
+            <input type="number" id="cleanSheets" name="cleanSheets" value={formData.cleanSheets} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="matchesWon" className="block text-sm font-semibold text-gray-700">Matches Won</label>
+            <input type="number" id="matchesWon" name="matchesWon" value={formData.matchesWon} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label htmlFor="injuries" className="block text-sm font-semibold text-gray-700">Injuries</label>
+            <input type="text" id="injuries" name="injuries" value={formData.injuries} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="certifications" className="block text-sm font-semibold text-gray-700">Certifications</label>
+            <input type="text" id="certifications" name="certifications" value={formData.certifications} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label htmlFor="trainingPhilosophy" className="block text-sm font-semibold text-gray-700">Training Philosophy</label>
+            <textarea id="trainingPhilosophy" name="trainingPhilosophy" value={formData.trainingPhilosophy} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="playerVideoLinks" className="block text-sm font-semibold text-gray-700">Player Video Links</label>
+            <input type="text" id="playerVideoLinks" name="playerVideoLinks" value={formData.playerVideoLinks} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label htmlFor="fitnessLevel" className="block text-sm font-semibold text-gray-700">Fitness Level</label>
+            <input type="text" id="fitnessLevel" name="fitnessLevel" value={formData.fitnessLevel} onChange={handleChange} className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        
   {/* Submit Button */}
   <div className="flex justify-center">
       <Button type="submit">

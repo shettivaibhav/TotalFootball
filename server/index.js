@@ -3,20 +3,26 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const PlayersModel = require("./models/players"); // Signup model
-const searchRoutes = require("./routes/searchRoutes");
-
+// const searchRoutes = require("./routes/searchRoutes");
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connection to "players" database
-const playersDbConnection = mongoose.createConnection("mongodb://localhost:27017/players", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
-// Use the models with the respective connections
-const Players = playersDbConnection.model("players", PlayersModel.schema);
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/players');
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+  }
+};
+
+connectToDatabase();
+
+// Use the models with the default connection
+const Players = mongoose.model('players', PlayersModel.schema);
+
 
 // Secret key for JWT
 const SECRET_KEY = "your-secret-key";
@@ -149,8 +155,27 @@ app.get("/resume", authenticate, async (req, res) => {
   }
 });
 
-//search players
-app.use("/", searchRoutes);
+app.get('/players', async (req, res) => {
+  try {
+    const players = await PlayersModel.find();
+    res.json(players);
+  } catch (err) {
+    console.error('Error fetching players:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.get('/cardresume/:id', async (req, res) => {
+  try {
+    const player = await PlayersModel.findById(req.params.id);
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+    res.json(player);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching player details', error });
+  }
+});
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
