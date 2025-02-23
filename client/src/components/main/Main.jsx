@@ -1,9 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Search, LogOut, ChevronDown, ChevronLeft, ChevronRight, Menu } from 'lucide-react'
 import SearchPlayers from "../pages/SearchPlayers";
+import Stats from '../pages/Stats';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,10 +35,10 @@ import adv2 from '@/images/adv2.jpeg';
 import adv3 from '@/images/adv3.jpeg';
 
 const navItems = [
-  { name: 'Training', icon: '🏋️' },
-  { name: 'Fitness', icon: '💪' },
-  { name: 'Injury', icon: '🩹' },
+  { name: 'Training', icon: '🏋️' , link: '/training' },
+  { name: 'Injury', icon: '🩹' , link: '/injury' },
   { name: 'Nutrient', icon: '🥗' },
+  { name: 'Live Match', icon: '⚽', link: '/live-match' }
 ]
 
 const ads = [
@@ -85,14 +87,15 @@ export default function Main() {
               <span className="text-xl font-bold"></span>
             </SidebarHeader>
             <SidebarContent className="flex-1">
-            
               <SidebarMenu>
                 {navItems.map((item) => (
                   <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton>
-                      <span className="mr-2">{item.icon}</span>
-                      {item.name}
-                    </SidebarMenuButton>
+                    <Link to={item.link || "#"}> {/* Add Link for navigation */}
+                      <SidebarMenuButton>
+                        <span className="mr-2">{item.icon}</span>
+                        {item.name}
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
@@ -112,8 +115,8 @@ export default function Main() {
                 <Button classname={`${!isSidebarOpen ? 'ml-0' : ''}`} variant="outline" size="icon" onClick={toggleSidebar}>
                   <Menu className="h-6 w-6" />
                 </Button>
-                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
               </div>
+                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
@@ -159,6 +162,7 @@ export default function Main() {
                   </Button>
                 </div>
               </div>
+              <Stats/>
               <SearchPlayers/>
               {/* Add more dashboard content here */}
             </div>

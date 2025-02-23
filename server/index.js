@@ -157,7 +157,7 @@ app.get("/resume", authenticate, async (req, res) => {
 
 app.get('/players', async (req, res) => {
   try {
-    const players = await PlayersModel.find();
+    const players = await Players.find();
     res.json(players);
   } catch (err) {
     console.error('Error fetching players:', err);
@@ -167,13 +167,39 @@ app.get('/players', async (req, res) => {
 
 app.get('/cardresume/:id', async (req, res) => {
   try {
-    const player = await PlayersModel.findById(req.params.id);
+    const player = await Players.findById(req.params.id);
     if (!player) {
       return res.status(404).json({ message: 'Player not found' });
     }
     res.json(player);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching player details', error });
+  }
+});
+
+app.get('/stats', authenticate, async (req, res) => {
+  try {
+    const playerId = req.user.id; // Assuming the player's id is stored in the JWT token payload
+    const player = await Players.findById(playerId); // Fetch the player from the database using the playerId
+
+    if (!player) {
+      return res.status(404).send('Player not found');
+    }
+
+    // Send the player stats (including the raw data without calculated fields like matchesLost)
+    const stats = {
+      name: player.name,
+      appearances: player.appearances,
+      goalsScored: player.goalsScored,
+      assists: player.assists,
+      cleanSheets: player.cleanSheets,
+      matchesWon: player.matchesWon,
+    };
+
+    res.json(stats); // Send the player stats as a JSON response
+  } catch (error) {
+    console.error('Error fetching player stats:', error);
+    res.status(500).send('Server error');
   }
 });
 

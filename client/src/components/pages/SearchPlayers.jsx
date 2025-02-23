@@ -79,21 +79,38 @@ const SearchPlayers = () => {
       </div>
 
       <div className="container mx-auto my-4 overflow-y-auto h-[calc(100vh-100px)]">
-        {/* Player Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredPlayers.map((player) => (
-            <Link to={`/cardresume/${player._id}`} key={player._id} className="block">
-              <div key={player._id} className="bg-white p-4 rounded-lg shadow-md border border-gray-200 transform transition-transform duration-300 hover:scale-105">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{player.name}</h3>
-                <p className="text-sm text-gray-600 mb-1">User Type: <span className="font-medium">{player.userType}</span></p>
-                <p className="text-sm text-gray-600 mb-1">Date of Birth: <span className="font-medium">{new Date(player.dateOfBirth).toLocaleDateString()}</span></p>
-                <p className="text-sm text-gray-600 mb-1">Position: <span className="font-medium">{player.position}</span></p>
-                <p className="text-sm text-gray-600">Club: <span className="font-medium">{player.teamName}</span></p>
-              </div>
-            </Link>
-          ))}
+        <div className="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
+          <table className="w-full border-collapse">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="p-3 text-left text-gray-700 font-semibold">Name</th>
+                <th className="p-3 text-left text-gray-700 font-semibold">User Type</th>
+                <th className="p-3 text-left text-gray-700 font-semibold">Date of Birth</th>
+                <th className="p-3 text-left text-gray-700 font-semibold">Position</th>
+                <th className="p-3 text-left text-gray-700 font-semibold">Club</th>
+                <th className="p-3 text-left text-gray-700 font-semibold">View Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredPlayers.map((player) => (
+                <tr key={player._id} className="border-b hover:bg-gray-50 transition">
+                  <td className="p-3 text-gray-900">{player.name}</td>
+                  <td className="p-3 text-gray-700">{player.userType}</td>
+                  <td className="p-3 text-gray-700">{new Date(player.dateOfBirth).toLocaleDateString()}</td>
+                  <td className="p-3 text-gray-700">{player.position}</td>
+                  <td className="p-3 text-gray-700">{player.teamName}</td>
+                  <td className="p-3">
+                    <Link to={`/cardresume/${player._id}`} className="text-blue-600 hover:underline font-medium">
+                      View Profile
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
+
 
     </div>
   );
